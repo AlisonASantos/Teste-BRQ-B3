@@ -1,0 +1,66 @@
+<form [formGroup]="cdbForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="valorInicial">Valor Inicial:</label>
+    <input id="valorInicial" formControlName="valorInicial" type="number" />
+    <div *ngIf="cdbForm.get('valorInicial')?.invalid && cdbForm.get('valorInicial')?.touched">
+      <small *ngIf="cdbForm.get('valorInicial')?.errors?.required">Valor inicial é obrigatório.</small>
+      <small *ngIf="cdbForm.get('valorInicial')?.errors?.min">O valor inicial deve ser positivo.</small>
+    </div>
+  </div>
+  <br />
+  <div>
+    <label for="cdi">CDI:</label>
+    <input id="cdi" formControlName="cdi" type="number" />
+    <div *ngIf="cdbForm.get('cdi')?.invalid && cdbForm.get('cdi')?.touched">
+      <small *ngIf="cdbForm.get('cdi')?.errors?.required">CDI é obrigatório.</small>
+    </div>
+  </div>
+  <br />
+  <div>
+    <label for="taxaBanco">Taxa do Banco:</label>
+    <input id="taxaBanco" formControlName="taxaBanco" type="number" />
+    <div *ngIf="cdbForm.get('taxaBanco')?.invalid && cdbForm.get('taxaBanco')?.touched">
+      <small *ngIf="cdbForm.get('taxaBanco')?.errors?.required">Taxa do banco é obrigatória.</small>
+    </div>
+  </div>
+  <br />
+  <div>
+    <label for="meses">Meses:</label>
+    <input id="meses" formControlName="meses" type="number" />
+    <div *ngIf="cdbForm.get('meses')?.invalid && cdbForm.get('meses')?.touched">
+      <small *ngIf="cdbForm.get('meses')?.errors?.required">Meses são obrigatórios.</small>
+      <small *ngIf="cdbForm.get('meses')?.errors?.min">Deve ser pelo menos 1 mês.</small>
+    </div>
+  </div>
+  <br />
+  <button type="submit" [disabled]="cdbForm.invalid">Calcular CDB</button>
+</form>
+
+<h2>Itens Adicionados</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Valor Inicial</th>
+      <th>CDI</th>
+      <th>Taxa do Banco</th>
+      <th>Meses</th>
+      <th>Valor Final</th>
+      <th>Funções</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of cdbItems">
+      <td>{{ item.id }}</td>
+      <td>{{ item.valorInicial }}</td>
+      <td>{{ item.cdi }}</td>
+      <td>{{ item.taxaBanco }}</td>
+      <td>{{ item.meses }}</td>
+      <td>{{ item.valorFinal }}</td>
+      <td>
+        <button class="button button-edit" (click)="editItem(item)">Editar</button>
+        <button class="button button-delete" (click)="deleteItem(item.id)">Excluir</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

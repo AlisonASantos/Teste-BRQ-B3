@@ -1,0 +1,13 @@
+.course-card img{
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+button{
+    margin-top: 20px;
+    height: 40px;
+    font-size: 20px;
+    background: #1a7ce7;
+    color: white;
+    border-radius: 4px;
+}
